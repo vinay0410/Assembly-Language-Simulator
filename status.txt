@@ -1,0 +1,21 @@
+AT LINE : 1
+Altitude register changes to 1
+
+AT LINE : 2 
+ value of general register changes to 2
+
+AT LINE : 3
+Altitude register changes to 25
+
+AT LINE : 4 
+ x_pos register <- 45 
+ y_pos register <- 62
+
+AT LINE : 5 
+ value genral register changes to 1
+
+ALU Signal: ADD
+
+AT LINE : 6 
+ value of altitude register changes to 0
+
