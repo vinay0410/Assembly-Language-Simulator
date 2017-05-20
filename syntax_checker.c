@@ -36,10 +36,10 @@ int check_indirect (char test[30]);
 
 int main ()
 {
-	char file_name[30] = "instructions24";
+	char file_name[30] = "assembly.txt";
 	//LINKED* division = (LINKED*)malloc(sizeof(LINKED));
 
-	insert_instructions (file_name);
+//	insert_instructions (file_name);
 	display_instructions (file_name);
 	read_instructions (file_name);
 	//char text[30] = "@@11";
@@ -61,35 +61,9 @@ int main ()
 		printf("%s	", pt->part);
 		pt = pt->next;
 	}*/
-	
+return 1;	
 }
 
-void insert_instructions (char file_name[])
-{
-	int i, N;
-	printf ("how many instructions you wish to insert\n");
-	scanf ("%d", &N);
-	getchar ();
-
-	char code[30];
-	FILE* instructions = fopen (file_name, "a");
-
-	while (N--)
-	{
-		//scanf ("%s", code);
-		fgets (code, 30, stdin);
-
-		for (i=0;i<30;i++)
-		{
-			if (code[i] == '\n')
-				code[i] = '\0';
-		}
-		fwrite (code, 30*sizeof(char), 1, instructions);
-	}
-
-	fclose (instructions);
-
-}
 
 void display_instructions (char file_name[])
 {
@@ -160,12 +134,12 @@ void display_linked_list (LINKED* division)
 int read_instructions (char file_name[])
 {
 	FILE* instructions = fopen (file_name, "r");
-	char file1[30] = "opcodes";
+	char file1[30] = "opcodes.txt";
 	char code[30];
 	int line = 1;
 	int nodes;
 
-	while (fread (code, 30*sizeof(char), 1, instructions) != 0)
+	while (fgets(code, 100, instructions) != NULL)
 	{
 		//printf ("%s %d\n", code, (int)strlen (code));
 		LINKED* division = (LINKED*)malloc(sizeof(LINKED));
@@ -185,177 +159,177 @@ int read_instructions (char file_name[])
 		{
 			if (nodes > 1)
 				
-				printf ("too many arguements for take off \n error at :: [%d : 2] \n", line);
+				printf ("too many arguments for take off \n error at :: [%d : 2] \n", line);
 			
 		}
 		else if (strcmp ("LAND", division->part) == 0)
 		{
 			if (nodes > 1)
-				printf ("too many arguements for landing\n error at :: [%d : 2] \n", line);
+				printf ("too many arguments for landing\n error at :: [%d : 2] \n", line);
 		}
 		else if (strcmp ("OBAV", division->part) == 0)
 		{
 			if (nodes > 1)
-				printf ("no arguement needed for obsacle avoidance\n error at :: [%d : 2] \n", line);
+				printf ("no argument needed for obstacle avoidance\n error at :: [%d : 2] \n", line);
 		}
 		else if (strcmp ("SPER", division->part) == 0)
 		{
 			if (nodes > 1)
-				printf ("no arguement needed for searching a person\n error at :: [%d : 2] \n", line);
+				printf ("no argument needed for searching a person\n error at :: [%d : 2] \n", line);
 		}
 		else if (strcmp ("HLT", division->part) == 0)
 		{
 			if (nodes > 1)
-				printf ("no arguement needed for stoping the machine\n error at :: [%d : 2] \n", line);
+				printf ("no argument needed for stoping the machine\n error at :: [%d : 2] \n", line);
 		}
 		else if (strcmp ("JNE", division->part) == 0)
 		{
 			if (nodes < 2)
-				printf ("too less arguements for jumping\n error at :: [%d : 1]\n", line);
+				printf ("too less arguments for jumping\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf(" too many arguements for jumping\n error at :: [%d : 3] \n", line);
+				printf(" too many arguments for jumping\n error at :: [%d : 3] \n", line);
 			else if (check_integer(division->next->part, 255) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of arguement\n error at :: [%d : 2]\n", line);				
 		}
 		else if (strcmp ("JMP", division->part) == 0)
 		{
 			if (nodes < 2)
-				printf ("too less arguements for jumping\n error at :: [%d : 0]\n", line);
+				printf ("too less arguments for jumping\n error at :: [%d : 0]\n", line);
 			else if (nodes > 3)
-				printf(" too many arguements for jumping\n error at :: [%d : 3] \n", line);
+				printf(" too many arguments for jumping\n error at :: [%d : 3] \n", line);
 			else if (check_integer(division->next->part, 255) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 2]\n", line);				
 		}
 		else if (strcmp ("FLWT", division->part) == 0)
 		{
 			if (nodes < 2)
-				printf ("too less arguements for flying till a time\n error at :: [%d : 1]\n", line);
+				printf ("too less arguments for flying till a time\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf(" too many arguements for flying till a time\n error at :: [%d : 3] \n", line);
+				printf(" too many arguments for flying till a time\n error at :: [%d : 3] \n", line);
 			else if (check_integer(division->next->part, 255) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of arguement\n error at :: [%d : 2]\n", line);				
 		}
 		else if (strcmp ("JGE", division->part) == 0)
 		{
 			if (nodes < 2)
-				printf ("too less arguements for jumping\n error at :: [%d : 1]\n", line);
+				printf ("too less arguments for jumping\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf(" too many arguements for jumping\n error at :: [%d : 3] \n", line);
+				printf(" too many arguments for jumping\n error at :: [%d : 3] \n", line);
 			else if (check_integer(division->next->part, 255) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of arguement\n error at :: [%d : 2]\n", line);				
 		}
 		else if (strcmp ("JLE", division->part) == 0)
 		{
 			if (nodes < 2)
-				printf ("too less arguements for jumping\n error at :: [%d : 1]\n", line);
+				printf ("too less arguments for jumping\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf(" too many arguements for jumping\n error at :: [%d : 3] \n", line);
+				printf(" too many arguments for jumping\n error at :: [%d : 3] \n", line);
 			else if (check_integer(division->next->part, 255) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of arguement\n error at :: [%d : 2]\n", line);				
 		}
 		else if (strcmp ("GAHT", division->part) == 0)
 		{
 			if (nodes < 2)
-				printf ("too less arguements to gain height\n error at :: [%d : 1]\n", line);
+				printf ("too less arguments to gain height\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf(" too many arguements to gain height\n error at :: [%d : 3] \n", line);
+				printf(" too many arguments to gain height\n error at :: [%d : 3] \n", line);
 			else if (check_integer(division->next->part, 255) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of arguement\n error at :: [%d : 2]\n", line);				
 		}
 		else if (strcmp ("MSF", division->part) == 0)
 		{
 			if (nodes < 2)
-				printf ("too less arguements for MSF at line **%d**\n", line);
+				printf ("too less arguments for MSF at line **%d**\n", line);
 			else if (nodes > 3)
-				printf(" too many arguements for MSF at \n [%d : 3] \n", line);
+				printf(" too many arguments for MSF at \n [%d : 3] \n", line);
 			else if (check_integer(division->next->part, 255) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement at \n [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of arguement at \n [%d : 2]\n", line);				
 		}
 		else if (strcmp ("ROT", division->part) == 0)
 		{
 			if (nodes < 2)
-				printf ("too less arguements for rotation\n error at :: [%d : 1]\n", line);
+				printf ("too less arguments for rotation\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf(" too many arguements for rotation\n error at :: [%d : 3] \n", line);
+				printf(" too many arguments for rotation\n error at :: [%d : 3] \n", line);
 			else if (check_integer(division->next->part, 256) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 2]\n", line);				
 		}
 		else if (strcmp ("SUB", division->part) == 0)
 		{
 			if (nodes < 3)
-				printf("too less arguements for subtraction\n error at :: [%d : 1]\n", line);
+				printf("too less arguments for subtraction\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf("too many arguements for subtraction\n error at :: [%d : 4]\n", line);
+				printf("too many arguments for subtraction\n error at :: [%d : 4]\n", line);
 			else if (check_integer(division->next->part, 15) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of arguement\n error at :: [%d : 2]\n", line);				
 			else if (check_register(division->next->next->part) == 0 && check_indirect(division->next->next->part) == 0) 
 				printf ("no access is available to this kind of register or this register doesn't exist \n error at :: \n [%d : 3]\n", line);				
 		}
 		else if (strcmp ("ADD", division->part) == 0)
 		{
 			if (nodes < 3)
-				printf("too less arguements for addition\n error at :: [%d : 1]\n", line);
+				printf("too less arguments for addition\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf("too many arguements for addition\n error at :: [%d : 4]\n", line);
+				printf("too many arguments for addition\n error at :: [%d : 4]\n", line);
 			else if (check_integer(division->next->part, 15) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 2]\n", line);				
 			else if (check_register(division->next->next->part) == 0 && check_indirect (division->next->next->part) == 0) 
 				printf ("no access is available to this kind of register or this register doesn't exist\n error at :: [%d : 3]\n", line);				
 		}
 		else if (strcmp ("MOV", division->part) == 0)
 		{
 			if (nodes < 3)
-				printf("too less arguements for tranfering\n error at :: [%d : 1]\n", line);
+				printf("too less arguments for tranfering\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf("too many arguements for tranfering\n error at :: [%d : 4]\n", line);
+				printf("too many arguments for tranfering\n error at :: [%d : 4]\n", line);
 			else if (check_integer(division->next->part, 15) == 0 && check_register(division->next->part) == 0 && check_indirect(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 2]\n", line);				
 			else if (check_register(division->next->next->part) == 0 && check_indirect(division->next->next->part) == 0) 
 				printf ("no access is available to this kind of register or this register doesn't exist\n error at :: [%d : 3]\n", line);				
 		}
 		else if (strcmp ("MVTL", division->part) == 0)
 		{
 			if (nodes < 3)
-				printf("too less arguements for movement\n error at :: [%d : 1]\n", line);
+				printf("too less arguments for movement\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf("too many arguements for movement\n error at :: [%d : 4]\n", line);
+				printf("too many arguments for movement\n error at :: [%d : 4]\n", line);
 			else if (check_indirect (division->next->part) == 0 && check_register(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 2]\n", line);				
 			else if (check_indirect (division->next->next->part) == 0 && check_register(division->next->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement at :: [%d : 3]\n", line);				
+				printf ("wrong type of argument or overflow of argument at :: [%d : 3]\n", line);				
 		}
 		else if (strcmp ("CMP", division->part) == 0)
 		{
 			if (nodes < 3)
-				printf("too less arguements for comparison\n error at :: [%d : 1]\n", line);
+				printf("too less arguments for comparison\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf("too many arguements for comparison\n error at :: [%d : 4]\n", line);
+				printf("too many arguments for comparison\n error at :: [%d : 4]\n", line);
 			else if (check_indirect (division->next->part) == 0 && check_register(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of arguement\n error at :: [%d : 2]\n", line);				
 			else if (check_indirect (division->next->next->part) == 0 && check_register(division->next->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 3]\n", line);				
+				printf ("wrong type of argument or overflow of arguement\n error at :: [%d : 3]\n", line);				
 		}
 		else if (strcmp ("GUL", division->part) == 0)
 		{
 			if (nodes < 3)
-				printf("too less arguements for guidance\n error at :: [%d : 1]\n", line);
+				printf("too less arguemnts for guidance\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf("too many arguements for guidance\n error at :: [%d : 4]\n", line);
+				printf("too many arguemnts for guidance\n error at :: [%d : 4]\n", line);
 			else if (check_indirect (division->next->part) == 0 && check_register(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 2]\n", line);				
 			else if (check_indirect (division->next->next->part) == 0 && check_register(division->next->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 3]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 3]\n", line);				
 		}
 		else if (strcmp ("SPTM", division->part) == 0)
 		{
 			if (nodes < 3)
-				printf("too less arguements for sports mode\n error at :: [%d : 1]\n", line);
+				printf("too less arguments for sports mode\n error at :: [%d : 1]\n", line);
 			else if (nodes > 3)
-				printf("too many arguements for sports mode\n error at :: [%d : 4]\n", line);
+				printf("too many arguments for sports mode\n error at :: [%d : 4]\n", line);
 			else if (check_indirect (division->next->part) == 0 && check_register(division->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 2]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 2]\n", line);				
 			else if (check_indirect (division->next->next->part) == 0 && check_register(division->next->next->part) == 0) 
-				printf ("wrong type of arguement or overflow of arguement\n error at :: [%d : 3]\n", line);				
+				printf ("wrong type of argument or overflow of argument\n error at :: [%d : 3]\n", line);				
 		}
 
 
